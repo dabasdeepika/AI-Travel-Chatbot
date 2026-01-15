@@ -1,0 +1,35 @@
+version: "3.1"
+
+stories:
+
+- story: 📝 Collect user information with greeting and auto-fill
+  steps:
+    - intent: greet
+    - action: action_time_based_greet
+    - action: user_data_form
+    - active_loop: user_data_form
+
+    - active_loop: null
+    - action: action_submit_user_data
+    - action: utter_done
+
+- story: 🟢 Start form using start intent (triggered from JS)
+  steps:
+    - intent: start_form
+    - action: action_time_based_greet
+    - action: user_data_form
+    - active_loop: user_data_form
+
+    - active_loop: null
+    - action: action_submit_user_data
+    - action: utter_done
+
+- story: 🌐 Set language before starting form
+  steps:
+    - intent: set_language
+    - action: action_validate_input_language
+
+- story: ❌ User ends the conversation
+  steps:
+    - intent: goodbye
+    - action: utter_default
