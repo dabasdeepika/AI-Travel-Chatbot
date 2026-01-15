@@ -1,0 +1,194 @@
+version: "3.1"
+
+intents:
+  - greet
+  - goodbye
+  - set_language
+  - provide_name
+  - provide_age
+  - provide_phone
+  - provide_email
+  - provide_gender
+  - provide_dob
+  - provide_state
+  - provide_city
+  - provide_address
+  - provide_pincode
+  - start_form  # Triggered by "start" from JS
+
+entities:
+  - name
+  - age
+  - phone
+  - email
+  - gender
+  - dob
+  - state
+  - city
+  - address
+  - pincode
+  - language
+
+slots:
+  language:
+    type: text
+    influence_conversation: true
+    mappings:
+      - type: from_entity
+        entity: language
+      - type: from_text
+
+  name:
+    type: text
+    mappings:
+      - type: from_text
+        conditions:
+          - active_loop: user_data_form
+            requested_slot: name
+
+  age:
+    type: text
+    mappings:
+      - type: from_text
+        conditions:
+          - active_loop: user_data_form
+            requested_slot: age
+
+  phone:
+    type: text
+    mappings:
+      - type: from_text
+        conditions:
+          - active_loop: user_data_form
+            requested_slot: phone
+
+  email:
+    type: text
+    mappings:
+      - type: from_text
+        conditions:
+          - active_loop: user_data_form
+            requested_slot: email
+
+  gender:
+    type: text
+    mappings:
+      - type: from_entity
+        entity: gender
+        conditions:
+          - active_loop: user_data_form
+            requested_slot: gender
+
+  dob:
+    type: text
+    mappings:
+      - type: from_text
+        conditions:
+          - active_loop: user_data_form
+            requested_slot: dob
+
+  pincode:
+    type: text
+    mappings:
+      - type: from_text
+        conditions:
+          - active_loop: user_data_form
+            requested_slot: pincode
+
+  state:
+    type: text
+    mappings:
+      - type: custom  # Filled via pincode API
+
+  city:
+    type: text
+    mappings:
+      - type: custom  # Filled via pincode API
+
+  address:
+    type: text
+    mappings:
+      - type: from_text
+        conditions:
+          - active_loop: user_data_form
+            requested_slot: address
+
+responses:
+  utter_ask_language:
+    - text: "Which language do you prefer?"
+      buttons:
+        - title: "🇬🇧 English"
+          payload: '/set_language{"language": "en"}'
+        - title: "🇮🇳 Hindi"
+          payload: '/set_language{"language": "hi"}'
+
+  utter_ask_name:
+    - text: "What's your full name?"
+
+  utter_ask_age:
+    - text: "Great! How old are you?"
+
+  utter_ask_phone:
+    - text: "Please provide your phone number."
+
+  utter_ask_email:
+    - text: "What's your email address?"
+
+  utter_ask_gender:
+    - text: "What is your gender?"
+      buttons:
+        - title: "👨 Male"
+          payload: '/provide_gender{"gender": "male"}'
+        - title: "👩 Female"
+          payload: '/provide_gender{"gender": "female"}'
+        - title: "⚧ Other"
+          payload: '/provide_gender{"gender": "other"}'
+
+  utter_ask_dob:
+    - text: "Enter your date of birth (DD-MM-YYYY)."
+
+  utter_ask_pincode:
+    - text: "Enter your 6-digit pin code."
+
+  utter_ask_address:
+    - text: "What is your full address?"
+
+  utter_invalid_phone:
+    - text: "❌ That doesn't look like a valid phone number. Please enter a 10-digit number."
+
+  utter_invalid_email:
+    - text: "❌ Please enter a valid email address."
+
+  utter_invalid_pincode:
+    - text: "❌ That pin code seems invalid. Please enter a valid 6-digit pin code."
+
+  utter_done:
+    - text: "✅ Thank you! Your information has been saved successfully."
+
+  utter_submit:
+    - text: "📩 Submitting your information..."
+
+  utter_default:
+    - text: "😕 Sorry, I didn’t understand that. Can you rephrase?"
+
+forms:
+  user_data_form:
+    required_slots:
+      - language
+      - name
+      - age
+      - phone
+      - email
+      - gender
+      - dob
+      - pincode
+      - state
+      - city
+      - address
+
+actions:
+  - validate_user_data_form
+  - action_submit_user_data
+  - action_time_based_greet
+  - action_validate_input_language
+  - action_default_fallback
