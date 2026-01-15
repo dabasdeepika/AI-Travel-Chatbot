@@ -1,0 +1,41 @@
+version: "3.1"
+
+rules:
+
+# 🚀 Rule to start form after user says greeting like "hello"
+- rule: 🚀 Start form with time-based greeting
+  steps:
+    - intent: greet
+    - action: action_time_based_greet
+    - action: user_data_form
+    - active_loop: user_data_form
+
+# 🟢 Rule to start form when user types/sends "start" (used by JS on open)
+- rule: 🟢 Start form from "start"
+  steps:
+    - intent: start_form
+    - action: action_time_based_greet
+    - action: user_data_form
+    - active_loop: user_data_form
+
+# ✅ Submit form after all required slots are filled
+- rule: ✅ Submit form
+  condition:
+    - active_loop: user_data_form
+  steps:
+    - action: user_data_form
+    - active_loop: null
+    - action: action_submit_user_data
+    - action: utter_done
+
+# 🌐 Rule to process language selection buttons
+- rule: 🌐 Set user language
+  steps:
+    - intent: set_language
+    - action: action_validate_input_language
+
+# ⚠️ Fallback rule for unrecognized input
+- rule: ⚠️ Handle fallback
+  steps:
+    - intent: nlu_fallback
+    - action: utter_default
