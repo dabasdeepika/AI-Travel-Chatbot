@@ -205,3 +205,12 @@ cython_debug/
 marimo/_static/
 marimo/_lsp/
 __marimo__/
+
+# Ignore Django migration files if you don't want them versioned
+**/migrations/*.pyc
+**/migrations/__pycache__/
+**/migrations/*.py[cod]
+# Keep __init__.py in migrations though (important for Django)
+
+# Rasa model files (optional, as they can be large)
+models/
