@@ -1,0 +1,125 @@
+from chatbotapi.models import Hotel, Flight
+
+# Optional: clear old data
+Hotel.objects.all().delete()
+Flight.objects.all().delete()
+
+# ---------------- HOTELS DATA ----------------
+hotel_entries = {
+    "Delhi": [
+        ("Taj Palace, New Delhi", 9500),
+        ("The Lodhi", 8500),
+        ("The Galgotias Hotel", 4000),
+        ("Lemon Tree Premier", 5000),
+        ("Welcomhotel By ITC Hotels", 7000),
+        ("Radisson Blu Marina Hotel", 4800),
+    ],
+    "Mumbai": [
+        ("The Taj Mahal Palace", 12000),
+        ("InterContinental Marine Drive", 8500),
+        ("Trident, Bandra Kurla", 8000),
+        ("Hotel Heritage", 4500),
+        ("Sea Green Hotel", 4000),
+        ("The Leela Mumbai", 9000),
+    ],
+    "Bangalore": [
+        ("Vivanta Bengaluru", 7000),
+        ("Holiday Inn Racecourse", 5000),
+        ("Hyatt Centric", 8000),
+        ("Holiday Inn Express", 4800),
+        ("Radisson Blu Hotel", 7800),
+        ("The LaLiT Ashok", 9500),
+    ],
+    "Chennai": [
+        ("The Pride Hotel", 5200),
+        ("The Madras Grand", 4500),
+        ("Taj Connemara", 9000),
+        ("Ramada Egmore", 6000),
+        ("Novotel Chamiers Road", 7800),
+        ("ITC Grand Chola", 10000),
+    ],
+    "Kolkata": [
+        ("The Oberoi Grand", 11000),
+        ("ITC Royal Bengal", 9000),
+        ("The Lindsay", 4500),
+        ("JW Marriott", 8500),
+        ("Hotel HHI", 4800),
+        ("Hotel Monotel", 5300),
+    ],
+    "Hyderabad": [
+        ("The Park", 7800),
+        ("The Manohar", 5200),
+        ("Lemon Tree Banjara Hills", 4800),
+        ("Taj Krishna", 10000),
+        ("ITC Kohenur", 10500),
+        ("Hotel Grand Himayat", 5000),
+    ],
+    "Pune": [
+        ("Lemon Tree Premier", 5500),
+        ("Hyatt Pune", 8500),
+        ("Crowne Plaza", 8200),
+        ("Novotel", 6000),
+        ("Sheraton Grand", 9000),
+        ("Conrad Pune", 9500),
+    ],
+    "Ahmedabad": [
+        ("Ginger RTO Circle", 3500),
+        ("Sarovar Portico", 4500),
+        ("Four Points Sheraton", 6000),
+        ("Taj Skyline", 9800),
+        ("Wyndham Shela", 8200),
+        ("Renaissance Hotel", 7500),
+    ],
+    "Jaipur": [
+        ("ITC Rajputana", 8900),
+        ("Hotel Sarang Palace", 4200),
+        ("Rambagh Palace", 12000),
+        ("Umaid Bhawan", 5000),
+        ("Sunday Hotel", 4800),
+        ("InterContinental", 9500),
+    ],
+    "Goa": [
+        ("Golden Tulip Candolim", 5400),
+        ("LaLiT Golf Resort", 11000),
+        ("SinQ Privé", 5000),
+        ("The Fern Habitat", 4700),
+        ("Salcete Resort", 4500),
+        ("St. Regis Goa", 13000),
+    ]
+}
+
+for city, hotels in hotel_entries.items():
+    for name, price in hotels:
+        if price <= 5000:
+            category = "budget"
+        elif price <= 8000:
+            category = "midrange"
+        else:
+            category = "luxury"
+        Hotel.objects.create(name=name, city=city, price=price, category=category)
+
+# ---------------- FLIGHTS DATA ----------------
+cities = list(hotel_entries.keys())
+airlines = ["Air India", "IndiGo", "Akasa Air"]
+
+import random
+for departure in cities:
+    for arrival in cities:
+        if departure != arrival:
+            for airline in airlines:
+                price = random.randint(3000, 12000)
+                if price <= 5000:
+                    category = "budget"
+                elif price <= 8000:
+                    category = "midrange"
+                else:
+                    category = "luxury"
+                Flight.objects.create(
+                    airline=airline,
+                    departure=departure,
+                    arrival=arrival,
+                    price=price,
+                    category=category
+                )
+
+print("✅ Sample hotels and flights loaded successfully!")
