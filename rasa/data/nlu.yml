@@ -1,0 +1,151 @@
+version: "3.1"
+
+nlu:
+
+- intent: greet
+  examples: |
+    - hi
+    - hello
+    - hey
+    - good morning
+    - good afternoon
+    - good evening
+    - good night
+    - hey there
+    - hello there
+    - good day
+    - hi there
+    - greetings
+
+- intent: goodbye
+  examples: |
+    - bye
+    - goodbye
+    - see you later
+    - talk to you soon
+    - bye for now
+    - catch you later
+    - see ya
+
+- intent: start_form
+  examples: |
+    - start
+    - begin
+    - let's get started
+    - okay let's go
+    - I'm ready
+    - start form
+    - start now
+    - open chatbot
+    - launch bot
+
+- intent: set_language
+  examples: |
+    - I prefer English
+    - English
+    - Hindi
+    - switch to Hindi
+    - change language to English
+    - set my language to Hindi
+    - please speak in Hindi
+    - talk in English
+    - I want Hindi
+
+- intent: provide_name
+  examples: |
+    - my name is [Deeshu](name)
+    - I am [Anjali](name)
+    - it's [Rahul](name)
+    - [Priya](name)
+    - [Rohit](name) is my name
+    - you can call me [Riya](name)
+    - [Arjun](name)
+    - myself [Suresh](name)
+
+- intent: provide_age
+  examples: |
+    - I am [20](age)
+    - [21](age)
+    - [18](age)
+    - I'm [25](age)
+    - my age is [30](age)
+    - [22](age) years old
+    - just [19](age)
+    - age is [23](age)
+
+- intent: provide_phone
+  examples: |
+    - my number is [9876543210](phone)
+    - [9667350068](phone)
+    - it's [1234567890](phone)
+    - you can call me at [9823456789](phone)
+    - contact number is [9765432198](phone)
+    - phone is [9999999999](phone)
+
+- intent: provide_email
+  examples: |
+    - my email is [rahul@gmail.com](email)
+    - it's [deepika123@yahoo.com](email)
+    - contact me at [user@example.com](email)
+    - [test.email@domain.com](email)
+    - you can reach me at [me@website.org](email)
+    - email is [demo@demo.com](email)
+
+- intent: provide_gender
+  examples: |
+    - I am [female](gender)
+    - [male](gender)
+    - it's [other](gender)
+    - I'm a [male](gender)
+    - I'm a [female](gender)
+    - I'm [other](gender)
+    - gender is [female](gender)
+
+- intent: provide_dob
+  examples: |
+    - my date of birth is [12/08/2001](dob)
+    - it's [1998-10-15](dob)
+    - [05-05-2000](dob)
+    - I was born on [01/01/1995](dob)
+    - [01-12-1990](dob)
+    - dob is [15/06/1998](dob)
+    - birth date is [2000-01-01](dob)
+
+- intent: provide_state
+  examples: |
+    - I live in [Maharashtra](state)
+    - [Delhi](state)
+    - I'm from [Karnataka](state)
+    - [Uttar Pradesh](state)
+    - my state is [Tamil Nadu](state)
+    - [Bihar](state)
+    - from [Rajasthan](state)
+
+- intent: provide_city
+  examples: |
+    - I am from [Mumbai](city)
+    - [Bangalore](city)
+    - [Hyderabad](city)
+    - I stay in [Pune](city)
+    - [Noida](city)
+    - [Lucknow](city)
+    - from [Chennai](city)
+
+- intent: provide_address
+  examples: |
+    - my address is [123, MG Road](address)
+    - [45, Sector 9, Noida](address)
+    - it's [89A, New Market, Delhi](address)
+    - [12/B, Residency Lane, Kolkata](address)
+    - I live at [221B Baker Street](address)
+    - my full address is [Flat 5, Tower A, Gurgaon](address)
+
+- intent: provide_pincode
+  examples: |
+    - [110020](pincode)
+    - my pincode is [110092](pincode)
+    - it's [400001](pincode)
+    - [560076](pincode)
+    - [122001](pincode)
+    - the pin code is [700001](pincode)
+    - pin is [600001](pincode)
